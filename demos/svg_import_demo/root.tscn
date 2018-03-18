@@ -1,0 +1,403 @@
+[gd_scene format=2]
+
+[node name="root" type="Node2D" index="0"]
+
+[node name="SVGMesh" type="SVGMesh" parent="." index="0"]
+
+svg = null
+tesselate_scale = 250.0
+tesselate_tolerance = 10.0
+
+[node name="untitled-1" type="Node2D" parent="SVGMesh" index="0"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-1" index="0"]
+
+polygon = PoolVector2Array( 32, 78, 35, 80, 48, 89, 57, 101, 48, 109, 34, 98, 31, 96, 26, 96, 21, 98, 9, 110, 5, 120, 4, 119, 0, 110, 5, 94, 11, 86, 19, 80, 26, 77 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.913725, 0.733333, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path2" type="Polygon2D" parent="SVGMesh/untitled-1" index="1"]
+
+polygon = PoolVector2Array( 229, 80, 237, 86, 243, 94, 248, 110, 244, 119, 243, 120, 239, 110, 227, 98, 222, 96, 217, 96, 214, 98, 200, 109, 191, 101, 200, 89, 213, 80, 216, 78, 222, 77 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.913725, 0.733333, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="untitled-2" type="Node2D" parent="SVGMesh" index="1"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-2" index="0"]
+
+polygon = PoolVector2Array( 34, 98, 48, 109, 47, 109, 31, 130, 20, 127, 7, 121, 5, 120, 9, 110, 21, 98, 26, 96, 31, 96 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.796078, 0.635294, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path2" type="Polygon2D" parent="SVGMesh/untitled-2" index="1"]
+
+polygon = PoolVector2Array( 227, 98, 239, 110, 243, 120, 241, 121, 228, 127, 217, 130, 201, 109, 200, 109, 214, 98, 217, 96, 222, 96 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.796078, 0.635294, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="untitled-3" type="Node2D" parent="SVGMesh" index="2"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-3" index="0"]
+
+polygon = PoolVector2Array( 32, 72, 35, 74, 49, 84, 59, 97, 60, 99, 57, 101, 48, 89, 35, 80, 32, 78, 26, 77, 19, 80, 11, 86, 5, 94, 0, 110, 0, 107, 1, 98, 5, 88, 11, 80, 19, 74, 26, 71 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 1, 0.8, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path2" type="Polygon2D" parent="SVGMesh/untitled-3" index="1"]
+
+polygon = PoolVector2Array( 229, 74, 237, 80, 243, 88, 247, 98, 248, 107, 248, 110, 243, 94, 237, 86, 229, 80, 222, 77, 216, 78, 213, 80, 200, 89, 191, 101, 190, 100, 188, 99, 189, 97, 199, 84, 213, 74, 216, 72, 222, 71 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 1, 0.8, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="untitled-4" type="Node2D" parent="SVGMesh" index="3"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-4" index="0"]
+
+polygon = PoolVector2Array( 97, 8, 99, 10, 105, 18, 105, 19, 103, 24, 100, 29, 105, 59, 105, 63, 102, 65, 98, 64, 96, 61, 85, 32, 80, 30, 75, 26, 73, 20, 72, 19, 74, 14, 79, 9, 84, 6, 91, 6 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.796078, 0.635294, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path2" type="Polygon2D" parent="SVGMesh/untitled-4" index="1"]
+
+polygon = PoolVector2Array( 169, 9, 174, 14, 176, 19, 175, 20, 172, 26, 167, 31, 163, 32, 152, 61, 150, 64, 146, 65, 143, 62, 143, 59, 148, 29, 145, 24, 143, 20, 143, 18, 148, 10, 151, 8, 157, 6, 164, 6 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.796078, 0.635294, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="untitled-5" type="Node2D" parent="SVGMesh" index="4"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-5" index="0"]
+
+polygon = PoolVector2Array( 79, 3, 84, 0, 91, 0, 97, 2, 99, 3, 105, 12, 105, 18, 99, 10, 97, 8, 91, 6, 84, 6, 79, 9, 74, 14, 72, 18, 74, 8 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.858824, 0.686275, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path2" type="Polygon2D" parent="SVGMesh/untitled-5" index="1"]
+
+polygon = PoolVector2Array( 169, 9, 164, 6, 157, 6, 151, 8, 148, 10, 143, 18, 143, 12, 148, 4, 151, 2, 157, 0, 164, 0, 169, 3, 174, 8, 176, 18, 174, 14 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.858824, 0.686275, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="untitled-6" type="Node2D" parent="SVGMesh" index="5"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-6" index="0"]
+
+polygon = PoolVector2Array( 181, 86, 160, 97, 160, 95, 154, 77, 153, 75, 150, 74, 131, 74, 129, 75, 128, 77, 119, 85, 119, 81, 111, 70, 109, 69, 106, 69, 94, 72, 92, 74, 91, 76, 91, 89, 92, 92, 94, 93, 106, 97, 109, 97, 111, 96, 119, 85, 128, 77, 122, 95, 122, 97, 123, 99, 138, 110, 141, 111, 143, 110, 158, 99, 160, 97, 181, 86, 169, 112, 127, 115, 127, 113, 126, 110, 119, 104, 116, 103, 114, 103, 105, 108, 104, 110, 103, 113, 105, 122, 107, 124, 109, 125, 119, 126, 121, 126, 123, 124, 127, 115, 169, 112, 160, 125, 149, 135, 137, 140, 125, 142, 112, 140, 101, 135, 90, 125, 80, 112, 69, 86, 63, 56, 187, 56 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.933333, 0.745098, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="untitled-7" type="Node2D" parent="SVGMesh" index="6"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-7" index="0"]
+
+polygon = PoolVector2Array( 119, 104, 126, 110, 127, 113, 127, 115, 123, 124, 121, 126, 119, 126, 109, 125, 107, 124, 105, 122, 103, 113, 104, 110, 105, 108, 114, 103, 116, 103 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 1, 0.8, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path2" type="Polygon2D" parent="SVGMesh/untitled-7" index="1"]
+
+polygon = PoolVector2Array( 153, 75, 154, 77, 160, 95, 160, 97, 158, 99, 143, 110, 141, 111, 138, 110, 123, 99, 122, 97, 122, 95, 128, 77, 129, 75, 131, 74, 150, 74 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 1, 0.8, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path3" type="Polygon2D" parent="SVGMesh/untitled-7" index="2"]
+
+polygon = PoolVector2Array( 111, 70, 119, 81, 119, 85, 111, 96, 109, 97, 106, 97, 94, 93, 92, 92, 91, 89, 91, 76, 92, 74, 94, 72, 106, 69, 109, 69 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 1, 0.8, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path4" type="Polygon2D" parent="SVGMesh/untitled-7" index="3"]
+
+polygon = PoolVector2Array( 69, 86, 80, 112, 90, 125, 101, 135, 112, 140, 125, 142, 137, 140, 149, 135, 160, 125, 169, 112, 181, 86, 187, 56, 210, 56, 220, 60, 223, 69, 223, 236, 199, 160, 198, 152, 194, 146, 187, 142, 180, 140, 173, 142, 166, 146, 162, 152, 161, 160, 87, 160, 86, 152, 82, 146, 76, 142, 68, 140, 61, 142, 54, 146, 50, 152, 49, 160, 50, 167, 54, 173, 61, 178, 68, 179, 76, 178, 82, 173, 86, 167, 87, 160, 161, 160, 162, 167, 166, 173, 173, 178, 180, 179, 187, 178, 194, 173, 198, 167, 199, 160, 223, 236, 220, 246, 210, 249, 196, 249, 190, 244, 188, 237, 186, 228, 186, 225, 181, 215, 170, 202, 150, 189, 126, 185, 102, 189, 81, 202, 70, 215, 66, 224, 65, 229, 63, 237, 60, 245, 54, 249, 38, 249, 28, 246, 25, 236, 25, 69, 28, 60, 38, 56, 63, 56 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 1, 0.8, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="untitled-8" type="Node2D" parent="SVGMesh" index="7"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-8" index="0"]
+
+polygon = PoolVector2Array( 220, 54, 223, 64, 223, 69, 220, 60, 210, 56, 38, 56, 28, 60, 25, 69, 25, 64, 28, 54, 38, 50, 210, 50 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 1, 0.843137, 0.219608, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="untitled-9" type="Node2D" parent="SVGMesh" index="8"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-9" index="0"]
+
+polygon = PoolVector2Array( 187, 142, 194, 146, 198, 152, 199, 160, 192, 160, 188, 151, 179, 147, 169, 151, 165, 160, 169, 169, 179, 173, 188, 169, 192, 160, 199, 160, 198, 167, 194, 173, 187, 178, 180, 179, 173, 178, 166, 173, 162, 167, 161, 160, 162, 152, 166, 146, 173, 142, 180, 140 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 1, 1, 1, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path2" type="Polygon2D" parent="SVGMesh/untitled-9" index="1"]
+
+polygon = PoolVector2Array( 76, 142, 82, 146, 86, 152, 87, 160, 86, 167, 83, 160, 79, 151, 70, 147, 60, 151, 56, 160, 60, 169, 70, 173, 79, 169, 83, 160, 86, 167, 82, 173, 76, 178, 68, 179, 61, 178, 54, 173, 50, 167, 49, 160, 50, 152, 54, 146, 61, 142, 68, 140 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 1, 1, 1, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="eyes" type="Node2D" parent="SVGMesh" index="9"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/eyes" index="0"]
+
+polygon = PoolVector2Array( 79, 151, 83, 160, 79, 169, 70, 173, 60, 169, 56, 160, 60, 151, 70, 147 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path2" type="Polygon2D" parent="SVGMesh/eyes" index="1"]
+
+polygon = PoolVector2Array( 188, 151, 192, 160, 188, 169, 179, 173, 169, 169, 165, 160, 169, 151, 179, 147 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="mouth" type="Node2D" parent="SVGMesh" index="10"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/mouth" index="0"]
+
+polygon = PoolVector2Array( 150, 189, 170, 202, 181, 215, 155, 208, 155, 202, 154, 201, 147, 200, 139, 205, 138, 205, 137, 207, 136, 211, 115, 211, 114, 207, 113, 205, 112, 205, 104, 200, 97, 201, 96, 202, 96, 208, 101, 216, 101, 217, 107, 219, 113, 217, 115, 211, 136, 211, 139, 217, 144, 219, 150, 217, 150, 216, 155, 208, 181, 215, 186, 225, 186, 228, 188, 237, 190, 244, 196, 249, 54, 249, 60, 245, 63, 237, 65, 229, 66, 224, 70, 215, 81, 202, 102, 189, 126, 185 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.823529, 0.658824, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="untitled-10" type="Node2D" parent="SVGMesh" index="11"]
+
+[node name="path1" type="Polygon2D" parent="SVGMesh/untitled-10" index="0"]
+
+polygon = PoolVector2Array( 154, 201, 155, 202, 155, 208, 150, 216, 150, 217, 144, 219, 139, 217, 136, 211, 137, 207, 138, 205, 139, 205, 147, 200 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.639216, 0.509804, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="path2" type="Polygon2D" parent="SVGMesh/untitled-10" index="1"]
+
+polygon = PoolVector2Array( 112, 205, 113, 205, 114, 207, 115, 211, 113, 217, 107, 219, 101, 217, 101, 216, 96, 208, 96, 202, 97, 201, 104, 200 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.639216, 0.509804, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+
