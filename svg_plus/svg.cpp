@@ -3,11 +3,10 @@
 /*************************************************************************/
 
 #include "svg.h"
-#include "os/file_access.h"
-#include "thirdparty/misc/clipper.hpp"
-#include "thirdparty/misc/triangulator.h"
-#include "scene/2d/polygon_2d.h"
 #include "../svg/image_loader_svg.h"
+#include "bezier_2d.cpp"
+#include "os/file_access.h"
+#include "scene/2d/polygon_2d.h"
 
 NSVGimage *NanoSVG::get_data() const {
 
@@ -23,7 +22,7 @@ NanoSVG::NanoSVG(const String &p_path, const String &p_units, float p_dpi) {
 	String str;
 	str.parse_utf8((const char *)buf.ptr(), buf.size());
 
-	data = nsvgParse((char*)str.utf8().get_data(), p_units.utf8().get_data(), p_dpi);
+	data = nsvgParse((char *)str.utf8().get_data(), p_units.utf8().get_data(), p_dpi);
 }
 
 NanoSVG::~NanoSVG() {
@@ -35,59 +34,6 @@ NanoSVG::~NanoSVG() {
 }
 
 /////////////////////////
-
-static void flatten_cubic_bezier(
-	float x1, float y1, float x2, float y2,
-	float x3, float y3, float x4, float y4,
-	float p_tolerance, int p_level, Array &r_points)
-{
-	// adapted from nsvg__flattenCubicBez()
-
-	float x12,y12,x23,y23,x34,y34,x123,y123,x234,y234,x1234,y1234;
-	float dx,dy,d2,d3;
-
-	if (p_level <= 0) return;
-
-	x12 = (x1+x2)*0.5f;
-	y12 = (y1+y2)*0.5f;
-	x23 = (x2+x3)*0.5f;
-	y23 = (y2+y3)*0.5f;
-	x34 = (x3+x4)*0.5f;
-	y34 = (y3+y4)*0.5f;
-	x123 = (x12+x23)*0.5f;
-	y123 = (y12+y23)*0.5f;
-
-	dx = x4 - x1;
-	dy = y4 - y1;
-	d2 = Math::abs(((x2 - x4) * dy - (y2 - y4) * dx));
-	d3 = Math::abs(((x3 - x4) * dy - (y3 - y4) * dx));
-
-	if ((d2 + d3)*(d2 + d3) < p_tolerance * (dx*dx + dy*dy)) {
-		r_points.push_back(Vector2(x4, y4));
-		return;
-	}
-
-	x234 = (x23+x34)*0.5f;
-	y234 = (y23+y34)*0.5f;
-	x1234 = (x123+x234)*0.5f;
-	y1234 = (y123+y234)*0.5f;
-
-	flatten_cubic_bezier(x1,y1, x12,y12, x123,y123, x1234,y1234, p_tolerance, p_level - 1, r_points);
-	flatten_cubic_bezier(x1234,y1234, x234,y234, x34,y34, x4,y4, p_tolerance, p_level - 1, r_points);
-}
-
-static Array flatten_path(NSVGpath *p_path, float p_scale, float p_tolerance, int p_max_levels) {
-
-	const float s = p_scale;
-	Array points;
-	points.push_back(Vector2(p_path->pts[0] * s, p_path->pts[1] * s));
-	for (int i = 0; i + 3 < p_path->npts; i += 3) {
-		const float *p = &p_path->pts[i * 2];
-		flatten_cubic_bezier(p[0] * s, p[1] * s, p[2] * s, p[3] * s, p[4] * s, p[5] * s, p[6] * s, p[7] * s, p_tolerance, p_max_levels, points);
-	}
-	points.push_back(Vector2(p_path->pts[0] * s, p_path->pts[1] * s));
-	return points;
-}
 
 void SVGPath::_bind_methods() {
 
@@ -138,67 +84,13 @@ static Variant convert_nsvg_paint(const NSVGpaint &p_paint) {
 	return Variant();
 }
 
-static Array get_polygons(const NSVGshape *p_shape, float p_scale, float p_tolerance, int p_max_levels) {
+static Rect2 get_shape_bounds(const NSVGshape *p_shape) {
 
-	ClipperLib::Paths clipper_paths;
-	NSVGpath *path = p_shape->paths;
-	while (path) {
-		Array points = flatten_path(path, p_scale, p_tolerance, p_max_levels);
-
-		ClipperLib::Path clipper_path;
-		for (int i = 0; i < points.size(); i++) {
-			const Vector2 p = points[i];
-			clipper_path.push_back(ClipperLib::IntPoint(p.x, p.y));
-		}
-		clipper_paths.push_back(clipper_path);
-
-		path = path->next;
-	}
-
-	ClipperLib::PolyFillType fill_type;
-	switch (p_shape->fillRule) {
-		case NSVG_FILLRULE_NONZERO: {
-			fill_type = ClipperLib::pftNonZero;
-		} break;
-		case NSVG_FILLRULE_EVENODD: {
-			fill_type = ClipperLib::pftEvenOdd;
-		} break;
-		default: {
-			ERR_FAIL_V(Array());
-		} break;
-	}
-
-	ClipperLib::SimplifyPolygons(clipper_paths, fill_type);
-
-	List<TriangulatorPoly> polys;
-	for (int i = 0; i < clipper_paths.size(); i++) {
-		const int n = clipper_paths[i].size();
-		TriangulatorPoly poly;
-		poly.Init(n);
-		for (int j = 0; j < n; j++) {
-			const ClipperLib::IntPoint &p = clipper_paths[i][j];
-			poly[j] = Vector2(p.X, p.Y);
-		}
-		if (!ClipperLib::Orientation(clipper_paths[i])) {
-			poly.SetHole(true);
-		}
-		polys.push_back(poly);
-	}
-
-	List<TriangulatorPoly> solution;
-	TriangulatorPartition partition;
-	partition.RemoveHoles(&polys, &solution);
-
-	Array solution_paths;
-	for (int i = 0; i < solution.size(); i++) {
-		Array solution_path;
-		for (int j = 0; j < solution[i].GetNumPoints(); j++) {
-			solution_path.push_back(solution[i][j]);
-		}
-		solution_paths.push_back(solution_path);
-	}
-
-	return solution_paths;
+	return Rect2(
+			p_shape->bounds[0],
+			p_shape->bounds[1],
+			p_shape->bounds[2] - p_shape->bounds[0],
+			p_shape->bounds[3] - p_shape->bounds[1]);
 }
 
 void SVGShape::_bind_methods() {
@@ -282,43 +174,81 @@ Array SVG::get_shapes() const {
 	return shapes;
 }
 
-void SVG::update_mesh(Node *p_parent, float p_scale, float p_tolerance, int p_max_levels) {
+void SVG::update_mesh(Node *p_parent) {
 
-	NSVGshape *shape = svg->get_data()->shapes;
+	NSVGshape *shape;
+
+	shape = svg->get_data()->shapes;
+	Rect2 bounds;
+	if (shape) {
+		bounds = get_shape_bounds(shape);
+		shape = shape->next;
+	}
+	if (shape) {
+		bounds = bounds.merge(get_shape_bounds(shape));
+		shape = shape->next;
+	}
+
+	const float ox = bounds.position.x + bounds.size.width / 2;
+	const float oy = bounds.position.y + bounds.size.height / 2;
+	const float original_size = MAX(bounds.size.width, bounds.size.height);
+	const float sx = 100 / original_size;
+	const float sy = 100 / original_size;
+
 	int untitled_no = 1;
+
+	shape = svg->get_data()->shapes;
 	while (shape) {
-		Color color = convert_nsvg_paint(shape->fill);
-		Array polygons = get_polygons(shape, p_scale, p_tolerance, p_max_levels);
-		const int n_polygons = polygons.size();
+		Bezier2D *bezier = memnew(Bezier2D);
+
+		Color fill_color = convert_nsvg_paint(shape->fill);
+		bezier->set_fill_color(fill_color);
+
+		Color stroke_color = convert_nsvg_paint(shape->stroke);
+		bezier->set_stroke_color(stroke_color);
+		bezier->set_stroke_width(shape->stroke.type != NSVG_PAINT_NONE ? shape->strokeWidth : 0.0);
+
+		switch (shape->fillRule) {
+			case NSVG_FILLRULE_NONZERO: {
+				bezier->set_fill_rule(Bezier2D::FILLRULE_NONZERO);
+			} break;
+			case NSVG_FILLRULE_EVENODD: {
+				bezier->set_fill_rule(Bezier2D::FILLRULE_EVENODD);
+			} break;
+			default: {
+				ERR_FAIL();
+			} break;
+		}
+
+		NSVGpath *path = shape->paths;
+		while (path) {
+			Vector<Vector2> points;
+			points.resize(path->npts);
+			for (int i = 0; i < path->npts; i++) {
+				points[i] = Vector2(
+						(path->pts[2 * i + 0] - ox) * sx,
+						(path->pts[2 * i + 1] - oy) * sy);
+			}
+			bezier->add_path(points);
+
+			path = path->next;
+		}
 
 		String shape_name = shape->id;
 		if (shape_name == "") {
 			shape_name = "untitled-" + String::num(untitled_no++);
 		}
 
-		Node *container = NULL;
 		if (p_parent->has_node(shape_name)) {
-			container = p_parent->get_node(shape_name);
-			while (container->get_child_count() > 0) {
-				Node *child = container->get_child(0);
-				container->remove_child(child);
-				child->queue_delete();
-			}
-		} else {
-			container = memnew(Node2D);
-			container->set_name(shape_name);
-			p_parent->add_child(container);
-			container->set_owner(p_parent->get_owner());
+			// FIXME
+			Node *old = p_parent->get_node(shape_name);
+			p_parent->remove_child(old);
+			old->queue_delete();
 		}
+		bezier->set_name(shape_name);
+		p_parent->add_child(bezier);
+		bezier->set_owner(p_parent->get_owner());
 
-		for (int i = 0; i < n_polygons; i++) {
-			Polygon2D *polygon = memnew(Polygon2D);
-			polygon->set_polygon(polygons[i]);
-			polygon->set_color(color);
-			polygon->set_name("path" + String::num(i + 1));
-			container->add_child(polygon);
-			polygon->set_owner(p_parent->get_owner());
-		}
 		shape = shape->next;
 	}
 }
@@ -364,36 +294,29 @@ void SVG::_bind_methods() {
 
 /////////////////////////
 
-void SVGMesh::update_mesh() {
+void SVGInstance::update_mesh() {
 
 	if (svg.is_valid()) {
 
-		svg->update_mesh(this, tesselate_scale, tesselate_tolerance, 10);
+		svg->update_mesh(this);
+		update();
 	}
 }
 
-void SVGMesh::_bind_methods() {
+void SVGInstance::_bind_methods() {
 
-	ClassDB::bind_method(D_METHOD("set_svg"), &SVGMesh::set_svg);
-	ClassDB::bind_method(D_METHOD("get_svg"), &SVGMesh::get_svg);
-
-	ClassDB::bind_method(D_METHOD("set_tesselate_scale"), &SVGMesh::set_tesselate_scale);
-	ClassDB::bind_method(D_METHOD("get_tesselate_scale"), &SVGMesh::get_tesselate_scale);
-
-	ClassDB::bind_method(D_METHOD("set_tesselate_tolerance"), &SVGMesh::set_tesselate_tolerance);
-	ClassDB::bind_method(D_METHOD("get_tesselate_tolerance"), &SVGMesh::get_tesselate_tolerance);
+	ClassDB::bind_method(D_METHOD("set_svg"), &SVGInstance::set_svg);
+	ClassDB::bind_method(D_METHOD("get_svg"), &SVGInstance::get_svg);
 
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "svg", PROPERTY_HINT_RESOURCE_TYPE, "Texture"), "set_svg", "get_svg");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "tesselate_scale"), "set_tesselate_scale", "get_tesselate_scale");
-	ADD_PROPERTY(PropertyInfo(Variant::REAL, "tesselate_tolerance"), "set_tesselate_tolerance", "get_tesselate_tolerance");
 }
 
-Ref<Resource> SVGMesh::get_svg() const {
+Ref<Resource> SVGInstance::get_svg() const {
 
 	return svg_image;
 }
 
-void SVGMesh::set_svg(const Ref<Resource> &p_svg) {
+void SVGInstance::set_svg(const Ref<Resource> &p_svg) {
 
 	// this is a hack, as we always get a texture here due to
 	// Godot's default SVG importer being an image importer.
@@ -410,32 +333,7 @@ void SVGMesh::set_svg(const Ref<Resource> &p_svg) {
 	}
 }
 
-float SVGMesh::get_tesselate_scale() const {
-
-	return tesselate_scale;
-}
-
-void SVGMesh::set_tesselate_scale(float p_scale) {
-
-	tesselate_scale = p_scale;
-	update_mesh();
-}
-
-float SVGMesh::get_tesselate_tolerance() const {
-
-	return tesselate_tolerance;
-}
-
-void SVGMesh::set_tesselate_tolerance(float p_tolerance) {
-
-	tesselate_tolerance = p_tolerance;
-	update_mesh();
-}
-
-SVGMesh::SVGMesh() {
-
-	tesselate_scale = 100;
-	tesselate_tolerance = 10;
+SVGInstance::SVGInstance() {
 }
 
 /////////////////////////

@@ -11,6 +11,7 @@
 #include "core/image.h"
 #include "io/resource_loader.h"
 #include "scene/2d/node_2d.h"
+#include "tesselator_2d.h"
 
 class NanoSVG : public Reference {
 	GDCLASS(NanoSVG, Reference);
@@ -74,19 +75,17 @@ public:
 
 	Array get_shapes() const;
 
-	void update_mesh(Node *p_parent, float p_scale, float p_tolerance, int p_max_levels);
+	void update_mesh(Node *p_parent);
 	Ref<Image> rasterize(int p_width, int p_height, float p_tx, float p_ty, float p_scale) const;
 };
 
 /////////////
 
-class SVGMesh : public Node2D {
-	GDCLASS(SVGMesh, Node2D);
+class SVGInstance : public Tesselator2D {
+	GDCLASS(SVGInstance, Tesselator2D);
 
 	Ref<Resource> svg_image;
 	Ref<SVG> svg;
-	float tesselate_scale;
-	float tesselate_tolerance;
 
 	void update_mesh();
 
@@ -97,13 +96,7 @@ public:
 	Ref<Resource> get_svg() const;
 	void set_svg(const Ref<Resource> &p_svg);
 
-	float get_tesselate_scale() const;
-	void set_tesselate_scale(float p_scale);
-
-	float get_tesselate_tolerance() const;
-	void set_tesselate_tolerance(float p_tolerance);
-
-	SVGMesh();
+	SVGInstance();
 };
 
 /////////////
