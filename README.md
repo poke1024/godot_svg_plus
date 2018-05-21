@@ -1,3 +1,5 @@
+Preliminary note: This project is currently abandoned (it turned into [TÖVE](https://github.com/poke1024/tove2d)).
+
 This is an experimental module for Godot to add better SVG support, more specifically:
 
 * import SVGs as polygon meshes in the editor (providing a new `SVGMesh` node)
