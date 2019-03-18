@@ -1,1 +1,1 @@
-Note: This project is abandoned, but it turned into [TÖVE](https://github.com/poke1024/tove2d), that now also has an experimental Godot module.
+This repo is abandoned. Please head to [vector_graphics](https://github.com/poke1024/godot_vector_graphics) instead.
